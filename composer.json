@@ -1,0 +1,43 @@
+{
+    "name": "selfiens/pipe",
+    "description": "Minimalistic pipe",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Selfiens"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.43",
+        "phpstan/phpstan": "^1.12",
+        "phpunit/phpunit": "^11.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Selfiens\\Pipe\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Selfiens\\Pipe\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
+    },
+    "scripts": {
+        "post-package-install": [
+            "composer normalize"
+        ],
+        "post-package-uninstall": [
+            "composer normalize"
+        ],
+        "test": "@php vendor/bin/phpunit ./tests",
+        "phpstan": "@php vendor/bin/phpstan analyze",
+        "phpstan-baseline": "@php vendor/bin/phpstan analyze --generate-baseline"
+    }
+}
