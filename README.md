@@ -140,24 +140,26 @@ P::pipe(
 
 These methods are predefined in the `Pipe` class.
 
-| Method    | Signature                                          | What it does                                    | Behavior  | Note                |
-|-----------|----------------------------------------------------|-------------------------------------------------|-----------|---------------------|
-| `tap`     | tap(callable $fn):mixed                            | peek data, usually for logging                  |           |                     |
-| `map`     | map(callable $fn):array                            | `array_map`                                     | array I/O |                     |
-| `filter`  | filter(callable $fn):array                         | `array_filter`                                  | array I/O |                     |
-| `reduce`  | reduce(callable $fn, mixed $initial = null):mixed  | `array_reduce`                                  |           |                     |
-| `flat`    | flat():array                                       | flatten a multi-dimensional array into 1D array | array I/O |                     |
-| `merge`   | merge(array ...$arrays):array                      | `array_merge`                                   |           |                     |
-| `take`    | take(int $n, bool $preserveKeys = false):array     | first N elements                                | array I/O | supports negative N |
-| `skip`    | skip(int $n, bool $preserveKeys = false):array     | last N elements                                 | array I/O | supports negative N |
-| `explode` | explode(string $separator, int $limit = MAX):array | `explode`                                       |           |                     |
-| `implode` | implode(string $separator = ''):string             | `implode`                                       |           |                     |
-| `join`    | join(string $separator = ''):string                | `implode`                                       |           | alias of `implode`  |
-| `sort`    | sort(?calalble $fn = null):array                   | `sort` or `ucsort($fn)`                         |           |                     |
-| `push`    | push(mixed ...$values):array                       | `array_push`                                    |           |                     |
-| `all`     | all(callable $fn):bool                             | true when all elements satisfy $fn              |           |                     |
-| `some`    | some(callable $fn):bool                            | true when some elements satisfy $fn             |           |                     |
-| `none`    | none(callable $fn):bool                            | true when no elements satisfy $fn               |           |                     |
+| Method      | Signature                                                    | What it does                                    | Behavior  | Note                |
+|-------------|--------------------------------------------------------------|-------------------------------------------------|-----------|---------------------|
+| `tap`       | tap(callable $fn):mixed                                      | peek data, usually for logging                  |           |                     |
+| `map`       | map(callable $fn):array                                      | `array_map`                                     | array I/O |                     |
+| `filter`    | filter(callable $fn):array                                   | `array_filter`                                  | array I/O |                     |
+| `filterNot` | filterNot(callable $fn):array                                | inverse of `array_filter`                       | array I/O |                     |
+| `column`    | column(string\|int\|null $col, string\|int\|null $key):array | `array_column`                                  | array I/O |                     |
+| `reduce`    | reduce(callable $fn, mixed $initial = null):mixed            | `array_reduce`                                  |           |                     |
+| `flat`      | flat():array                                                 | flatten a multi-dimensional array into 1D array | array I/O |                     |
+| `merge`     | merge(array ...$arrays):array                                | `array_merge`                                   |           |                     |
+| `take`      | take(int $n, bool $preserveKeys = false):array               | first N elements                                | array I/O | supports negative N |
+| `skip`      | skip(int $n, bool $preserveKeys = false):array               | last N elements                                 | array I/O | supports negative N |
+| `explode`   | explode(string $separator, int $limit = MAX):array           | `explode`                                       |           |                     |
+| `implode`   | implode(string $separator = ''):string                       | `implode`                                       |           |                     |
+| `join`      | join(string $separator = ''):string                          | `implode`                                       |           | alias of `implode`  |
+| `sort`      | sort(?calalble $fn = null):array                             | `sort` or `ucsort($fn)`                         |           |                     |
+| `push`      | push(mixed ...$values):array                                 | `array_push`                                    |           |                     |
+| `all`       | all(callable $fn):bool                                       | true when all elements satisfy $fn              |           |                     |
+| `some`      | some(callable $fn):bool                                      | true when some elements satisfy $fn             |           |                     |
+| `none`      | none(callable $fn):bool                                      | true when no elements satisfy $fn               |           |                     |
 
 - `array I/O` Behavior: If `$data` isn’t an array, it’s converted to `[$data]`.
 

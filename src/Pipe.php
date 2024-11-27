@@ -132,6 +132,16 @@ class Pipe
         };
     }
 
+    public static function filterNot(?callable $fn = null): Closure
+    {
+        return static fn(mixed $data): array => \array_filter(self::arrayWrap($data), fn($d) => !$fn($d));
+    }
+
+    public static function column(string|int|null $column, int|null|string $index_key = null): Closure
+    {
+        return static fn(mixed $data): array => \array_column(self::arrayWrap($data), $column, $index_key);
+    }
+
     /**
      * @param  callable  $fn  fn(mixed $carry, mixed $item)
      */

@@ -39,6 +39,24 @@ class TestCompanionMethods extends TestCase
         $this->assertEquals([1, 2], $actual);
     }
 
+    public function testFilerNot()
+    {
+        $actual = pipe([1, 2, 3], P::filterNot(fn($n) => $n === 2));
+        $this->assertEquals([1, 2 => 3], $actual);
+    }
+
+    public function testColumn()
+    {
+        $actual = pipe([['a' => 1, 'b' => 2], ['a' => 3, 'b' => 4]], P::column('a'));
+        $this->assertEquals([1, 3], $actual);
+
+        $actual = pipe([['a' => 1, 'b' => 2], ['a' => 3, 'b' => 4]], P::column(null));
+        $this->assertEquals([['a' => 1, 'b' => 2], ['a' => 3, 'b' => 4]], $actual);
+
+        $actual = pipe([['a' => 1, 'b' => 2], ['a' => 3, 'b' => 4]], P::column(null, 'a'));
+        $this->assertEquals([1 => ['a' => 1, 'b' => 2], 3 => ['a' => 3, 'b' => 4]], $actual);
+    }
+
     public function testReduce()
     {
         $actual = pipe([1, 2, 3], P::reduce(fn($carry, $item) => $carry + $item, 0));
