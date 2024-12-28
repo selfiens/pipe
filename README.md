@@ -128,9 +128,9 @@ use Selfiens\Pipe as P;
 
 P::pipe(
     [1,2,3,4,5],
-    P::map(fn($i) => $i*2),
-    P::filter(fn($i) => $i<10),
-    P::take(3),
+    P::map(fn($i) => $i*2),     // [2,4,6,8,10]
+    P::filter(fn($i) => $i<10), // [2,4,6,8]
+    P::take(3),                 // [2,4,6]
 ); // [2,4,6]
 ```
 ### Predefined Helper Methods
