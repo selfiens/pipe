@@ -4,13 +4,13 @@ https://github.com/selfiens/pipe
 
 This package is a `pipe` implementation with the following aims:
 
-- **Minimalistic**: simple signature, no special "wrapper" objects.
-- **PHP-first**: 100% PHP-callable based.
-- **Extensible**: users can add their own "Helper Methods" (see below).
+- **Simple** signature. no "wrapper" objects.
+- Based on **PHP-callable**.
+- Optional and extensible **"Helper Methods"** (see below).
 
 ## Code Example
 
-Here's an example of `pipe` applied to a simple string manipulation:
+An example of simple string manipulation:
 
 ```php
 $x = pipe(
@@ -22,13 +22,48 @@ $x = pipe(
 // $x === "Hello, Pipe World"
 ```
 
-The function call order matches the data processing sequence,
-unlike plain PHP, which often requires intermediate variables or reversed function nesting.
+The function calling order in the `pipe` matches the data processing order,
+unlike the plain PHP in which often requires intermediate variables or reversed function nesting.
 
 ```php
 // The equivalent code in plain PHP:
 ucfirst( strtolower( trim( " hello, pipe world " ) ) );
 ```
+
+## Installation
+
+Use [Composer](https://getcomposer.org) to install this package.
+This package requires PHP 8.0 or later.
+
+```shell
+composer require selfiens/pipe
+```
+
+### Using Global `pipe` Function
+
+The `pipe` function can be installed in the global(root) namespace.
+
+```php
+// define pipe() function in the root namespace
+\Selfiens\Pipe\Pipe::installGlobal();
+
+pipe(...);
+```
+
+Alternatively, you can load the global `pipe` function via `autoload.php`.
+Add `"vendor/selfiens/pipe/src/pipe_global.php"` to the `autoload/files` section of your `composer.json`:
+
+```json
+{
+  "autoload": {
+    "files": [
+      "vendor/selfiens/pipe/src/pipe_global.php"
+    ]
+  }
+}
+```
+
+**Note**: You may need to run `composer dump`
 
 ## The `pipe` Function Signature
 
@@ -80,12 +115,7 @@ $init = pipe(
 );
 ```
 
-## Code In Depth
-
-```php
-// no callables
-pipe('my data'); // = 'my data'
-```
+## Behavior In Depth
 
 Each callable's output becomes the next callable's input:
 
@@ -97,6 +127,11 @@ $x = pipe(
     fn($s) => $s . '0',     // $s='xyz'
 );
 // $x === 'xyz0'
+```
+
+```php
+// no callables
+pipe('my data'); // = 'my data'
 ```
 
 ### You can use any callable type supported by your PHP version.
@@ -133,6 +168,7 @@ P::pipe(
     P::take(3),                 // [2,4,6]
 ); // [2,4,6]
 ```
+
 ### Predefined Helper Methods
 
 These methods are predefined in the `Pipe` class.
@@ -221,50 +257,6 @@ P::define('odd', function (): Closure {
     };
 });
 
-```
-
-## Installation
-
-Use [Composer](https://getcomposer.org) to install this package.
-This package requires PHP 8.0 or later.
-
-```shell
-composer require selfiens/pipe
-```
-
-After installing the package, load the `autoload.php` file:
-
-```php
-use Selfiens\Pipe\Pipe;
-
-Pipe::pipe(...);
-```
-
-## Global `pipe` Function
-
-The `pipe` function can be installed in the global namespace.
-
-```php
-\Selfiens\Pipe\Pipe::installGlobal();
-```
-
-Alternatively, to load the global `pipe` automatically via `autoload.php`,
-you can add `"vendor/selfiens/pipe/src/pipe_global.php"` to the `autoload/files` section of your `composer.json`:
-
-```json
-{
-  "autoload": {
-    "files": [
-      "vendor/selfiens/pipe/src/pipe_global.php"
-    ]
-  }
-}
-```
-
-**Note**: You may need to run the following command if you have created an autoload cache:
-
-```shell
-composer dump
 ```
 
 ## More Examples
