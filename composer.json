@@ -37,7 +37,7 @@
             "composer normalize"
         ],
         "test": "@php vendor/bin/phpunit ./tests",
-        "phpstan": "@php vendor/bin/phpstan analyze",
+        "phpstan": "@php vendor/bin/phpstan analyze .",
         "phpstan-baseline": "@php vendor/bin/phpstan analyze --generate-baseline"
     }
 }

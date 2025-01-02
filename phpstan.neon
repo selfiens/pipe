@@ -1,0 +1,10 @@
+parameters:
+  level: 4
+  editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+  editorUrlTitle: '%%relFile%%:%%line%%'
+  paths:
+    - src
+  excludePaths:
+    - examples
+    - tests
+    - vendor

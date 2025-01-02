@@ -44,7 +44,7 @@ use function usort;
  */
 class Pipe
 {
-    /** @var array{string, callable} */
+    /** @var array<string, callable> */
     protected static array $userDefined = [];
 
     public static function install(): void
@@ -101,7 +101,7 @@ class Pipe
      */
     public static function __callStatic(string $name, array $arguments): mixed
     {
-        if (is_callable(static::$userDefined[$name])) {
+        if (isset(static::$userDefined[$name]) && is_callable(static::$userDefined[$name])) {
             return static::$userDefined[$name](...$arguments);
         }
         throw new Exception("Call to undefined method Pipe::$name");
